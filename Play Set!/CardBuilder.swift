@@ -16,8 +16,8 @@ struct CardBuilder: View {
             return .green
         case .purple:
             return .purple
-        case .red:
-            return .red
+        case .pink:
+            return .pink
         }
     }
     
@@ -37,28 +37,29 @@ struct CardBuilder: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
             VStack {
                 ForEach (0..<card.number.rawValue) { _ in
                     if card.shading == .transparent {
-                        ShapeBuilder(card.shape).stroke(lineWidth: CGFloat(3))
-                    } else {
+                        ShapeBuilder(card.shape).stroke(lineWidth: 5)
+                    }
+                    else {
                         ShapeBuilder(card.shape)
                     }
                 }
-                .padding(2)
+                .padding(.horizontal, 2)
+                .opacity(shading)
             }
             .cardify()
-            .foregroundColor(color)
-            .opacity(shading)
-            
-//            self.body(for: GridLayout(itemCount: items.count, in: geometry.size))
-        }
-
+            .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: card.isSelected ? 8 : 2)
+            )
+            .foregroundColor(card.isMatched ? .green : color)
     }
     
-    
 }
+
+
 
 struct ShapeBuilder: Shape {
     var shape: PatternAttributes.CardShape

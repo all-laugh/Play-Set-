@@ -36,6 +36,7 @@ struct Diamond: Shape {
         
         var p = Path()
         p.addLines([top, midLeft, bottom, midRight, top])
+        p.move(to: top)
         
         return p
     }

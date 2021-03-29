@@ -16,8 +16,7 @@ struct SetGameView: View {
                     setGameViewModel.choose(card)
                 }
                 .padding(5)
-                        }
-            .padding(2)
+            }
         }
     }
 }
