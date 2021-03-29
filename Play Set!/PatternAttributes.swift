@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct PatternAttributes {
-    enum CardNumber: Int, CaseIterable {
+    enum CardNumber: Int, Comparable, CaseIterable {
+        static func < (lhs: PatternAttributes.CardNumber, rhs: PatternAttributes.CardNumber) -> Bool {
+            lhs == rhs
+        }
+        
         case one = 1, two, three
     }
 
-    enum CardColor: CaseIterable {
+    enum CardColor: Comparable, CaseIterable {
         case purple, pink, green
     }
 
-    enum CardShape: CaseIterable {
+    enum CardShape: Comparable, CaseIterable {
         case capsule, triangle, displacedCircle
     }
 
-    enum CardShading: CaseIterable {
+    enum CardShading: Comparable, CaseIterable {
         case opaque, shaded, transparent
     }
 }

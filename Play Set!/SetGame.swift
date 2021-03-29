@@ -74,8 +74,6 @@ struct SetGame {
                 }
             }
         }
-
-        
         
     }
     
@@ -84,20 +82,17 @@ struct SetGame {
         let secondCard = selectedCards[1]
         let thirdCard = selectedCards[2]
         
-        let colorMatch = ( firstCard.color == secondCard.color && secondCard.color == thirdCard.color ) || ( firstCard.color != secondCard.color && secondCard.color != thirdCard.color && firstCard.color != thirdCard.color )
-        
-        let numberMatch = ( firstCard.number == secondCard.number && secondCard.number == thirdCard.number ) || ( firstCard.number != secondCard.number && secondCard.number != thirdCard.number && firstCard.number != thirdCard.number )
-        
-        let shapeMatch = ( firstCard.shape == secondCard.shape && secondCard.shape == thirdCard.shape ) || ( firstCard.shape != secondCard.shape && secondCard.shape != thirdCard.shape && firstCard.shape != thirdCard.shape )
-        
-        let shadingMatch = ( firstCard.shading == secondCard.shading && secondCard.shading == thirdCard.shading ) || ( firstCard.shading != secondCard.shading && secondCard.shading != thirdCard.shading && firstCard.shading != thirdCard.shading )
+        let colorMatch = isSet(firstCard.color, secondCard.color, thirdCard.color)
+        let numberMatch = isSet(firstCard.number, secondCard.number, thirdCard.number)
+        let shapeMatch = isSet(firstCard.shape, secondCard.shape, thirdCard.shape)
+        let shadingMatch = isSet(firstCard.shading, secondCard.shading, thirdCard.shading)
 
         return colorMatch && numberMatch && shapeMatch && shadingMatch
     }
     
-//    private func isSet (cardA: PlayCard, cardB: PlayCard, cardC: PlayCard) -> Bool {
-//        return isCorrectSet
-//    }
+    private func isSet<CardAttribute: Comparable>(_ a: CardAttribute, _ b: CardAttribute, _ c: CardAttribute ) -> Bool {
+        return ( a == b && b == c ) || ( a != b && b != c && a != c )
+    }
     
     
     // MARK: - Card Attributes
