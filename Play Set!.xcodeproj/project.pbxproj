@@ -80,21 +80,11 @@
 		115FA245260E8E87000C5509 /* Play Set! */ = {
 			isa = PBXGroup;
 			children = (
-				115FA270260F9AC2000C5509 /* Array+Identifiable.swift */,
-				115FA271260F9AC2000C5509 /* Array+Only.swift */,
 				115FA246260E8E87000C5509 /* AppDelegate.swift */,
 				115FA248260E8E87000C5509 /* SceneDelegate.swift */,
-				115FA25C260E8ED1000C5509 /* SetGame.swift */,
-				115FA25F260E8F17000C5509 /* SetGameViewModel.swift */,
-				115FA24A260E8E87000C5509 /* SetGameView.swift */,
-				115FA284260FDD7F000C5509 /* CardBuilder.swift */,
-				115FA2882610BE85000C5509 /* Diamond.swift */,
-				115FA2902610F14D000C5509 /* FixedCapsule.swift */,
-				115FA28C2610EDE6000C5509 /* DisplacedCircle.swift */,
-				115FA278260FD26C000C5509 /* PatternAttributes.swift */,
-				115FA26A260F9995000C5509 /* Cardify.swift */,
-				115FA26B260F9995000C5509 /* Grid.swift */,
-				115FA269260F9995000C5509 /* GridLayout.swift */,
+				11A3762D2613A2A500CA1E00 /* Model */,
+				11A3762E2613A2AC00CA1E00 /* ViewModel */,
+				11A3762C2613A27100CA1E00 /* View */,
 				115FA24C260E8E88000C5509 /* Assets.xcassets */,
 				115FA251260E8E88000C5509 /* LaunchScreen.storyboard */,
 				115FA254260E8E88000C5509 /* Info.plist */,
@@ -109,6 +99,40 @@
 				115FA24F260E8E88000C5509 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		11A3762C2613A27100CA1E00 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				115FA24A260E8E87000C5509 /* SetGameView.swift */,
+				115FA284260FDD7F000C5509 /* CardBuilder.swift */,
+				115FA2882610BE85000C5509 /* Diamond.swift */,
+				115FA2902610F14D000C5509 /* FixedCapsule.swift */,
+				115FA28C2610EDE6000C5509 /* DisplacedCircle.swift */,
+				115FA26A260F9995000C5509 /* Cardify.swift */,
+				115FA26B260F9995000C5509 /* Grid.swift */,
+				115FA269260F9995000C5509 /* GridLayout.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		11A3762D2613A2A500CA1E00 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				115FA270260F9AC2000C5509 /* Array+Identifiable.swift */,
+				115FA271260F9AC2000C5509 /* Array+Only.swift */,
+				115FA25C260E8ED1000C5509 /* SetGame.swift */,
+				115FA278260FD26C000C5509 /* PatternAttributes.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		11A3762E2613A2AC00CA1E00 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				115FA25F260E8F17000C5509 /* SetGameViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

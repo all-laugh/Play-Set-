@@ -5,7 +5,7 @@
 //  Created by Xiao Quan on 3/27/21.
 //
 
-import SwiftUI
+import Foundation
 
 struct PatternAttributes {
     enum CardNumber: Int, Comparable, CaseIterable {

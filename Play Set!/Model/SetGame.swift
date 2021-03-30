@@ -20,23 +20,20 @@ struct SetGame {
         deck = Array<PlayCard>()
         var id = 0
         for number in PatternAttributes.CardNumber.allCases {
-            for color in PatternAttributes.CardColor.allCases {
-                for shape in PatternAttributes.CardShape.allCases {
-                    for shading in PatternAttributes.CardShading.allCases {
-                        deck.append(
-                            PlayCard(
-                                id: id,
-                                number: number,
-                                color: color,
-                                shape: shape,
-                                shading: shading
-                                )
-                        )
-                        id += 1
-                    }
-                }
-            }
-        }
+        for color in PatternAttributes.CardColor.allCases {
+        for shape in PatternAttributes.CardShape.allCases {
+        for shading in PatternAttributes.CardShading.allCases {
+            deck.append(
+                PlayCard(
+                    id: id,
+                    number: number,
+                    color: color,
+                    shape: shape,
+                    shading: shading
+                    )
+            )
+            id += 1
+        }}}}
         deck.shuffle()
         self.startGame()
     }

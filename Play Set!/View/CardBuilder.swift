@@ -40,7 +40,7 @@ struct CardBuilder: View {
             VStack {
                 ForEach (0..<card.number.rawValue) { _ in
                     if card.shading == .transparent {
-                        ShapeBuilder(card.shape).stroke(lineWidth: 5)
+                        ShapeBuilder(card.shape).stroke(lineWidth: 3)
                     }
                     else {
                         ShapeBuilder(card.shape)
