@@ -12,12 +12,12 @@ struct CardBuilder: View {
     var card: SetGame.PlayCard
     var color: Color {
         switch card.color {
-        case .green:
-            return .green
-        case .purple:
-            return .purple
         case .pink:
             return .pink
+        case .purple:
+            return .purple
+        case .green:
+            return .green
         }
     }
     
@@ -54,7 +54,15 @@ struct CardBuilder: View {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(lineWidth: card.isSelected ? 8 : 2)
             )
-            .foregroundColor(card.isMatched ? .green : color)
+            .foregroundColor(matchColor(card))
+    }
+    
+    private func matchColor(_ card: SetGame.PlayCard) -> Color {
+        if let matched = card.isMatched {
+            if matched {
+                return .green
+            } else { return .red }
+        } else { return self.color }
     }
     
 }

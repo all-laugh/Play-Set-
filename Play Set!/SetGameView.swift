@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SetGameView: View {
     @ObservedObject var setGameViewModel: SetGameViewModel
+    var noCardsLeft: Bool { setGameViewModel.noCardsLeft }
+    
     var body: some View {
         VStack {
             Grid(setGameViewModel.onScreenCards) { card in
@@ -17,6 +19,24 @@ struct SetGameView: View {
                 }
                 .padding(5)
             }
+            
+            HStack {
+                if !noCardsLeft {
+                    Button("Three More!") {
+                        setGameViewModel.addThreeCards()
+                    }
+                    .foregroundColor(.red)
+                    
+                }
+                Spacer(minLength: 15)
+                
+                Button("New Game") {
+                    setGameViewModel.restartGame()
+                }
+                .foregroundColor(.green)
+            }
+            .font(Font.title.bold())
+            .padding(.horizontal)
         }
     }
 }

@@ -11,8 +11,11 @@ struct SetGame {
     var deck: Array<PlayCard>
     var onScreenCards = Array<PlayCard>()
     var selectedCards = Array<PlayCard>()
+    var setMatched: Bool?
     var matchedCards = Array<PlayCard>()
+    var noCardsLeft: Bool = false
     
+    // MARK: - Initialization
     init() {
         deck = Array<PlayCard>()
         var id = 0
@@ -44,37 +47,80 @@ struct SetGame {
             onScreenCards.append(deck.remove(at: index))
         }
     }
-    
+
     mutating func choose(_ card: PlayCard) {
+        selectCard(card)
+        checkSetMatch(card)
+        
+    }
+    
+    private mutating func checkSetMatch (_ card: PlayCard) {
+        if selectedCards.count == 3 {
+            print("Checking if there's a match!")
+            let isMatched = checkIfMatched()
+            print( isMatched ? "There's a match!" : "No match" )
+            updateCardMatch(isMatched)
+            updateCards(cardChosen: card, isSelectionMatched: isMatched)
+        }
+    }
+    
+    private mutating func updateCards(cardChosen card: PlayCard, isSelectionMatched isMatched: Bool) {
+        if let isSetMatched = setMatched {
+            if isSetMatched {
+                print("Removing on screen cards!")
+                for selectedCard in selectedCards {
+                    let onScreenCardIndex = onScreenCards.firstIndex(matching: selectedCard)!
+                    matchedCards.append(onScreenCards.remove(at: onScreenCardIndex))
+                }
+                self.addThreeCards()
+                selectedCards.removeAll()
+                self.setMatched = nil
+                return
+            } else {
+                print("Clear Selection")
+                for selectedCard in selectedCards {
+                    let onScreenCardIndex = onScreenCards.firstIndex(matching: selectedCard)!
+                    onScreenCards[onScreenCardIndex].isSelected = false
+                    onScreenCards[onScreenCardIndex].isMatched = nil
+                }
+                selectedCards.removeAll()
+                self.setMatched = nil
+                self.selectCard(card)
+                return
+            }
+        } else {
+            setMatched = isMatched
+            
+        }
+    }
+    
+    private mutating func selectCard(_ card: PlayCard) {
         print("-----------------------------")
         let chosenIndex = onScreenCards.firstIndex(matching: card)!
         
         print(card.isSelected)
-        onScreenCards[chosenIndex].isSelected = !onScreenCards[chosenIndex].isSelected
         
-        if onScreenCards[chosenIndex].isSelected {
-            selectedCards.append(onScreenCards[chosenIndex])
-        } else {
-            selectedCards.remove(at: selectedCards.firstIndex(matching: card)!)
+        if selectedCards.count < 3 {
+            onScreenCards[chosenIndex].isSelected = !onScreenCards[chosenIndex].isSelected
+            
+            if onScreenCards[chosenIndex].isSelected {
+                print("ADD CARD with ID \(card.id)")
+                selectedCards.append(onScreenCards[chosenIndex])
+            } else {
+                print("REMOVE CARD with ID \(card.id)")
+                selectedCards.remove(at: selectedCards.firstIndex(matching: card)!)
+            }
+            
         }
-        
-        print(selectedCards.count)
-        
-        if selectedCards.count == 3 {
-            let isMatched = checkIfMatched()
-            print("Checking if there's a match!")
-            if isMatched {
-                print("Matched!")
-                for index in selectedCards.indices {
-                    let selectedCard = selectedCards[index]
-//                    selectedCards[index].isMatched = true
-                    if let onScreenCardIndex = onScreenCards.firstIndex(matching: selectedCard) {
-                        onScreenCards[onScreenCardIndex].isMatched = true
-                    }
-                }
+        print(selectedCards.map { $0.id })
+    }
+    
+    private mutating func updateCardMatch(_ isMatch: Bool) {
+        for selectedCard in selectedCards {
+            if let onScreenCardIndex = onScreenCards.firstIndex(matching: selectedCard) {
+                self.onScreenCards[onScreenCardIndex].isMatched = isMatch
             }
         }
-        
     }
     
     private func checkIfMatched() -> Bool {
@@ -94,6 +140,26 @@ struct SetGame {
         return ( a == b && b == c ) || ( a != b && b != c && a != c )
     }
     
+    mutating func addThreeCards() {
+        print("\(deck.count) cards left in deck")
+        if deck.count >= 3 {
+            for _ in 0..<3 {
+                onScreenCards.append(deck.removeFirst())
+            }
+        } else if deck.count == 0 {
+            noCardsLeft = true
+        }
+    }
+    
+    mutating func resetGame() {
+        onScreenCards = Array<PlayCard>()
+        selectedCards = Array<PlayCard>()
+        setMatched = nil
+        matchedCards = Array<PlayCard>()
+        noCardsLeft = false
+        self = .init()
+    }
+    
     
     // MARK: - Card Attributes
     struct PlayCard: Identifiable {
@@ -103,7 +169,7 @@ struct SetGame {
         var shape: PatternAttributes.CardShape
         var shading: PatternAttributes.CardShading
         var isSelected = false
-        var isMatched = false
+        var isMatched: Bool?
 //        var content: CardContent
         
     }

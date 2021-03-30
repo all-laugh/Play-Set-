@@ -19,10 +19,19 @@ class SetGameViewModel: ObservableObject {
     // MARK: - Access to Model
     var deck: Array<SetGame.PlayCard> { game.deck }
     var onScreenCards: Array<SetGame.PlayCard> { game.onScreenCards }
+    var noCardsLeft: Bool { game.noCardsLeft }
     
     // MARK: - User Intents
     func choose(_ card: SetGame.PlayCard) {
         game.choose(card)
+    }
+    
+    func addThreeCards() {
+        game.addThreeCards()
+    }
+    
+    func restartGame() {
+        game.resetGame()
     }
     
 }

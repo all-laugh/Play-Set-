@@ -17,7 +17,7 @@ struct PatternAttributes {
     }
 
     enum CardColor: Comparable, CaseIterable {
-        case purple, pink, green
+        case purple, green, pink
     }
 
     enum CardShape: Comparable, CaseIterable {
