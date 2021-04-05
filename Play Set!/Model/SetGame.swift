@@ -8,12 +8,12 @@
 import Foundation
 
 struct SetGame {
-    var deck: Array<PlayCard>
-    var onScreenCards = Array<PlayCard>()
-    var selectedCards = Array<PlayCard>()
-    var setMatched: Bool?
-    var matchedCards = Array<PlayCard>()
-    var noCardsLeft: Bool = false
+    private(set) var deck: Array<PlayCard>
+    private(set) var onScreenCards = Array<PlayCard>()
+    private(set) var selectedCards = Array<PlayCard>()
+    private(set) var setMatched: Bool?
+    private(set) var matchedCards = Array<PlayCard>()
+    private(set) var noCardsLeft: Bool = false
     
     // MARK: - Initialization
     init() {
@@ -35,13 +35,13 @@ struct SetGame {
             id += 1
         }}}}
         deck.shuffle()
-        self.startGame()
+//        self.startGame()
     }
     
     // MARK: - Gameplay
     mutating func startGame() {
         for index in 0..<12 {
-            onScreenCards.append(deck.remove(at: index))
+            self.onScreenCards.append(deck.remove(at: index))
         }
     }
 
@@ -69,7 +69,9 @@ struct SetGame {
                     let onScreenCardIndex = onScreenCards.firstIndex(matching: selectedCard)!
                     matchedCards.append(onScreenCards.remove(at: onScreenCardIndex))
                 }
-                self.addThreeCards()
+                if onScreenCards.count < 12 {
+                    self.addThreeCards()
+                }
                 selectedCards.removeAll()
                 self.setMatched = nil
                 return
@@ -155,6 +157,7 @@ struct SetGame {
         matchedCards = Array<PlayCard>()
         noCardsLeft = false
         self = .init()
+        self.startGame()
     }
     
     

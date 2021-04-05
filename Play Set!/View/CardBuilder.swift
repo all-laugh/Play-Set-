@@ -27,7 +27,7 @@ struct CardBuilder: View {
             return 1
         case .shaded:
             return 0.5
-        case.transparent:
+        default:
             return 1
         }
     }
@@ -55,6 +55,7 @@ struct CardBuilder: View {
                         .stroke(lineWidth: card.isSelected ? 8 : 2)
             )
             .foregroundColor(matchColor(card))
+            .transition(AnyTransition.offset(randomOffScreenPosition()))
     }
     
     private func matchColor(_ card: SetGame.PlayCard) -> Color {
@@ -63,6 +64,20 @@ struct CardBuilder: View {
                 return .green
             } else { return .red }
         } else { return self.color }
+    }
+    
+    private func randomOffScreenPosition() -> CGSize {
+        let screen = UIScreen.main.bounds
+        let width = Int(screen.width)
+        let height = Int(screen.height)
+        
+        let randomOffscreenWidthRange = [-width-150 ... -width, width...width+150]
+        let randomOffscreenHeightRange = [-height-150 ... -height, height...height+150]
+
+        let randomWidthOffscreen = Int.random(in: randomOffscreenWidthRange.randomElement()!)
+        let randomHeightOffscreen = Int.random(in: randomOffscreenHeightRange.randomElement()!)
+        
+        return CGSize(width: randomWidthOffscreen, height: randomHeightOffscreen)
     }
     
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct Cardify: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
-                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
+            RoundedRectangle(cornerRadius: cornerRadius).fill(Color.clear)
 //                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: borderWidth)
                 content
 

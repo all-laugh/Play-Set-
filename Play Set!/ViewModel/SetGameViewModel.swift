@@ -30,6 +30,10 @@ class SetGameViewModel: ObservableObject {
         game.addThreeCards()
     }
     
+    func startGame() {
+        game.startGame()
+    }
+    
     func restartGame() {
         game.resetGame()
     }

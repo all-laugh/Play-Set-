@@ -9,17 +9,25 @@ import SwiftUI
 
 struct SetGameView: View {
     @ObservedObject var setGameViewModel: SetGameViewModel
+    
     var noCardsLeft: Bool { setGameViewModel.noCardsLeft }
     
     var body: some View {
         VStack {
             Grid(setGameViewModel.onScreenCards) { card in
                 CardBuilder(card).onTapGesture {
-                    setGameViewModel.choose(card)
+                    withAnimation(Animation.easeIn(duration: 0.1)) {
+                        setGameViewModel.choose(card)
+                    }
                 }
                 .padding(5)
             }
-            
+            .onAppear {
+                withAnimation(Animation.easeInOut(duration: 1.5).delay(0.1)) {
+                    self.setGameViewModel.startGame()
+                }
+            }
+
             HStack {
                 if !noCardsLeft {
                     Button("Three More!") {
@@ -28,24 +36,22 @@ struct SetGameView: View {
                     .foregroundColor(.red)
                     
                 }
-                Spacer(minLength: 15)
+                Spacer(minLength:5)
                 
                 Button("New Game") {
-                    setGameViewModel.restartGame()
+                    withAnimation(Animation.easeInOut(duration: 1)) {
+                        setGameViewModel.restartGame()
+                    }
                 }
                 .foregroundColor(.green)
             }
             .font(Font.title.bold())
-            .padding(.horizontal)
+            .padding(.horizontal, 20)
+            
         }
+
     }
 }
-
-
-
-
-
-
 
 
 

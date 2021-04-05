@@ -119,10 +119,10 @@
 		11A3762D2613A2A500CA1E00 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				115FA270260F9AC2000C5509 /* Array+Identifiable.swift */,
-				115FA271260F9AC2000C5509 /* Array+Only.swift */,
 				115FA25C260E8ED1000C5509 /* SetGame.swift */,
 				115FA278260FD26C000C5509 /* PatternAttributes.swift */,
+				115FA270260F9AC2000C5509 /* Array+Identifiable.swift */,
+				115FA271260F9AC2000C5509 /* Array+Only.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
