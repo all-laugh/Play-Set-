@@ -26,6 +26,10 @@ class SetGameViewModel: ObservableObject {
         game.choose(card)
     }
     
+    func checkSetMatch(_ card: SetGame.PlayCard ) {
+        game.checkSetMatch(card)
+    }
+    
     func addThreeCards() {
         game.addThreeCards()
     }

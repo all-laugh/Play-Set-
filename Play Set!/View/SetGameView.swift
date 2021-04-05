@@ -16,8 +16,9 @@ struct SetGameView: View {
         VStack {
             Grid(setGameViewModel.onScreenCards) { card in
                 CardBuilder(card).onTapGesture {
-                    withAnimation(Animation.easeIn(duration: 0.1)) {
-                        setGameViewModel.choose(card)
+                    setGameViewModel.choose(card)
+                    withAnimation(Animation.easeInOut(duration: 0.6)) {
+                        setGameViewModel.checkSetMatch(card)
                     }
                 }
                 .padding(5)
@@ -31,7 +32,9 @@ struct SetGameView: View {
             HStack {
                 if !noCardsLeft {
                     Button("Three More!") {
-                        setGameViewModel.addThreeCards()
+                        withAnimation(.easeInOut) {
+                            setGameViewModel.addThreeCards()
+                        }
                     }
                     .foregroundColor(.red)
                     

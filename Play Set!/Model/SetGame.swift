@@ -47,11 +47,11 @@ struct SetGame {
 
     mutating func choose(_ card: PlayCard) {
         selectCard(card)
-        checkSetMatch(card)
+//        checkSetMatch(card)
         
     }
     
-    private mutating func checkSetMatch (_ card: PlayCard) {
+    mutating func checkSetMatch (_ card: PlayCard) {
         if selectedCards.count == 3 {
             print("Checking if there's a match!")
             let isMatched = checkIfMatched()
